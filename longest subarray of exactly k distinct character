@@ -1,0 +1,70 @@
+package firstproject;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+public class Test {
+	
+	
+
+	    
+	public static void main(String[] args) {
+		Scanner sc=new Scanner (System.in);
+	String s="aabcdbabde";
+	int k=3;
+	HashMap<Character,Integer>h1=new HashMap<>();
+
+	int ans=0;
+	int i=-1;
+	int j=-1;
+	
+		while(true) {
+			boolean a=false;
+			boolean b=false;
+			
+			while(i<s.length()-1) {
+				a=true;
+				i++;
+				char ch=s.charAt(i);
+				h1.put(ch, h1.getOrDefault(ch, 0)+1);
+				if(h1.size()<k) {
+					continue;
+					
+				}
+				else if(h1.size()==k) {
+					if(ans<(i-j)) {
+						ans=(i-j);
+					}
+				}
+				else {
+					break;
+				}
+				
+			}
+			while(j<i) {
+				b=true;
+				j++;
+				char ch=s.charAt(j);
+				if(h1.get(ch)==1) {
+					h1.remove(ch);
+				}
+				else {
+					h1.put(ch, h1.get(ch)-1);
+				}
+				if(h1.size()>k) {
+					continue;
+				}
+				else if(h1.size()==k) {
+					if(i-j>ans) {
+						ans=i-j;
+					}
+					break;
+				}
+			}
+			if(a==false&&b==false) {
+				break;
+			}
+		}
+		System.out.println(ans);
+	
+}
+}
