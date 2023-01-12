@@ -1,34 +1,43 @@
+
+
+//User function Template for Java
 class Solution 
-{    
-   
-    long getSubstringWithEqual012(String str) 
-    {   Map<String,Integer> map=new HashMap<>();
-     int one=0;int two=0;int zero=0;
-      String key=(one-zero)+"#"+(two-one);
-      map.put(key,1);
-    long ans=(long)0;
-        for(int i=0;i<str.length();i++){
-       
-        if(str.charAt(i)=='1'){
-            one++;
-        }
-        else if(str.charAt(i)=='0'){
-            zero++;
-        }else{
-            two++;
-        }
-        key=(one-zero)+"#"+(two-one);
-        
-        if(map.containsKey(key)){
-            ans=ans+(long)map.get(key);
-            map.put(key,map.getOrDefault(key,0)+1);
-        }
-        else{
-             map.put(key,map.getOrDefault(key,0)+1);
-        }
-        
-        
-        }
-         return ans;
-    }
+{ 
+     long getSubstringWithEqual012(String str) 
+   { 
+       // code here
+      HashMap<String,Integer>map=new HashMap<>();
+      
+      int C0=0;
+      int C1=0;
+      int C2=0;
+      
+      long count=0;
+      map.put("0"+"*"+"0",1);
+      
+      for(int i=0;i<str.length();i++){
+          
+          char c=str.charAt(i);
+          
+          if(c=='0'){
+              C0++;
+          }else if(c=='1'){
+              C1++;
+          }else{
+              C2++;
+          }
+          
+          int C10=C1-C0;
+          int C21=C2-C1;
+          
+          String key=C10+"*"+C21;
+          
+          if(map.containsKey(key)){
+              count+=(long)map.get(key);
+          }
+          map.put(key,map.getOrDefault(key,0)+1);
+      }
+      return count;
+      
+   }
 } 
