@@ -1,36 +1,48 @@
 class Solution {
-     public static List<Integer> findAnagrams(String s, String p) {
-        List<Integer> ans = new ArrayList<>();
-        HashMap<Character, Integer> map2 = new HashMap<>(), map1 = new HashMap<>();
-        for (int i = 0; i < p.length(); i++) {
-            map2.put(p.charAt(i), map2.getOrDefault(p.charAt(i), 0) + 1);
+public static boolean compare(HashMap<Character,Integer>p,HashMap<Character,Integer>s){
+     for(char c:s.keySet()){
+         if(p.getOrDefault(c,0)!=s.get(c))
+             return false;
+          }
+         return true;
+       }
+    public List<Integer> findAnagrams(String s, String p) {
+         ArrayList<Integer>ans=new ArrayList<>();
+        if(p.length()>s.length()) return ans;
+        HashMap <Character,Integer> sh=new HashMap<>();
+        HashMap <Character,Integer> ph=new HashMap<>();
+        for(int i=0;i<p.length();i++){
+            char ch=p.charAt(i);
+            ph.put(ch,ph.getOrDefault(ch,0)+1);
         }
-        int i = -1, j = -1;
-        while (true) {
-            boolean f1 = false, f2 = false;
-            while (j < s.length() - 1) {
-                f1 = true;
-                j++;
-                char ch = s.charAt(j);
-                map1.put(ch, map1.getOrDefault(ch, 0) + 1);
-                if (!map2.containsKey(ch) || map1.get(ch) > map2.get(ch)) break;
-                if (j - i == p.length()) ans.add(i + 1);
-
-            }
-            while (i < j) {
-                i++;
-                f2 = true;
-                char ch = s.charAt(i);
-                map1.put(ch, map1.getOrDefault(ch, 0) - 1);
-                if (map1.get(ch) <= 0) map1.remove(ch);
-                if (!map2.containsKey(ch)) break;
-                if (map1.containsKey(ch) && map1.get(ch).equals(map2.get(ch))) {
-                    if (j - i == p.length()) ans.add(i + 1);
-                    break;
-                }
-            }
-            if (!f1 && !f2) break;
+         for(int i=0;i<p.length();i++){
+             char ch=s.charAt(i);
+            sh.put(ch,sh.getOrDefault(ch,0)+1);
         }
+           int j=0;
+          int i=p.length();
+          while(i<s.length()){
+          
+            if(compare(ph,sh)){                       // adding answer
+               ans.add(i-p.length()); 
+            }
+            
+            char ch=s.charAt(i);                           // aquiring
+             sh.put(ch,sh.getOrDefault(ch,0)+1);
+             
+              char chr=s.charAt(i-p.length());          // releasing
+            if(sh.get(chr)==1){
+                sh.remove(chr);
+            }
+            else{
+                sh.put(chr,sh.get(chr)-1);
+            }
+            i++;
+          }
+          // comparing last set of element present in map
+         if(compare(sh,ph)){
+         ans.add(i-p.length());
+         }
         return ans;
     }
 }
