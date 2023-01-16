@@ -3,16 +3,7 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 public class Test {
-	
-	
-
-	    
-	public static void main(String[] args) {
-		Scanner sc=new Scanner (System.in);
-	String s="abcde";
-	int k=6;
-	class Solution {
-    public int longest_atmost_k_Substr(String s, int k) {
+	 public int longest_atmost_k_Substr(String s, int k) {
         
         HashMap<Character,Integer> hm = new HashMap<>();
         int c = -1;
@@ -44,7 +35,11 @@ public class Test {
         return c;
         
     }
-}
+	public static void main(String[] args) {
+		Scanner sc=new Scanner (System.in);
+	String s="abcde";
+	int k=6;
+      return longest_atmost_k_Substr(s,k);
 
 	
 }
