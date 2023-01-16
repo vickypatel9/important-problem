@@ -12,7 +12,7 @@ public class Test {
 	String s="abcde";
 	int k=6;
 	class Solution {
-    public int longest_exactly_k_Substr(String s, int k) {
+    public int longest_atmost_k_Substr(String s, int k) {
         
         HashMap<Character,Integer> hm = new HashMap<>();
         int c = -1;
