@@ -3,10 +3,7 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 public class Test {
-	
-	
 
-	    
 	public static void main(String[] args) {
 		Scanner sc=new Scanner (System.in);
 	int []arr= {10, 2, -2, -20, 10};
@@ -16,9 +13,6 @@ public class Test {
 	int sum=0;
 	int ans=0;
 	int i=-1;
-	
-	
-		
 	
 		while(i<arr.length-1) {
 			
@@ -38,3 +32,36 @@ public class Test {
 	System.out.println(ans);
 }
 }
+
+
+// second method using sliding window--
+ public int maximum_length_subaaray_sum_equal_k(int []nums,int key){
+      int i=0;
+      int j=0;
+      int c=-1;
+      int sum=0;
+      int n=nums.length;
+      while(j<n){
+         sum=sum+nums[j];
+        if(sum<key)
+        j++;
+          if(sum==key){
+             if(c<(j-i+1)){
+                 c=(j-i+1);
+             }
+             j++;
+         }
+         else if(sum>key){
+             while(sum>key&&i<=j){
+                 sum=sum-nums[i];
+              i++;
+             }
+              if (sum == key) {
+                    c = Math.max(c, j- i + 1);
+                }
+             j++;
+         }
+      }
+     
+      return c;
+    }
