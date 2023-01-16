@@ -45,7 +45,7 @@ public class Test {
          sum=sum+nums[j];
         if(sum<key)
         j++;
-          if(sum==key){
+        else if(sum==key){
              if(c<(j-i+1)){
                  c=(j-i+1);
              }
