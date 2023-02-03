@@ -1,0 +1,23 @@
+public boolean canArrange(int[] arr, int k) {
+        int n = arr.length; 
+        HashMap<Integer, Integer> map = new HashMap<>(); // stores <remainder, count>
+        
+        for(int num : arr){
+            int rem = num % k; 
+            if(rem < 0) rem+=k; // handle neg nums
+            map.put(rem, map.getOrDefault(rem, 0) + 1); 
+        }
+        
+        for(int r : map.keySet()){
+            if(r == 0){ // means already divisible so to make pair they should be present in even
+            } 
+            else if(r * 2 == k){// if remaider is half of devisor then even no of remainder should be there
+            }
+            else{
+               int count1 = map.get(r); //num whose remainder = r can pair up with num whose remainder = k-r
+               int count2 = map.getOrDefault(k-r, 0); // count must be equal so that they can pair up with each other
+               if(count1!=count2) return false; 
+            }
+        }
+        return true; 
+    }
